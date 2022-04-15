@@ -1,0 +1,11 @@
+{% if start %}
+Повітряні тривоги за добу:
+{% endif %}
+
+{% for item in alerts %}
+‼️ {{ item.locationTitle }} - {{ item.startedAt|format_datetime('short', 'short', locale='uk', timezone='Europe/Kiev') }}
+{% endfor %}
+
+{% if end|length > 0 %}
+Кількість тривог за добу -  {{ end }}
+{% endif %}

@@ -1,0 +1,8 @@
+Список активних тревог:
+
+{% for item in alerts %}
+‼️ {{ item.locationTitle }} - {{ item.startedAt|format_datetime('short', 'short', locale='uk', timezone='Europe/Kiev') }}
+
+{% endfor %}
+
+Активні тривоги в даний час -  {{ alerts|length }}
