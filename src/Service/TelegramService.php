@@ -49,7 +49,7 @@ class TelegramService
 
             if (null === $user) {
                 $user = new Users();
-                $user->setUsername($userData->username)
+                $user->setUsername($userData->username ?? 'user_' . $userData->id)
                     ->setFirstName($userData->firstName)
                     ->setPlatformId($userData->id)
                     ->setCreated(time())

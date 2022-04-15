@@ -28,9 +28,7 @@ class AlertsRepository extends ServiceEntityRepository
         return $builder
             ->orderBy('a.started_at', 'ASC')
             ->andWhere('a.started_at > :time')
-            ->andWhere('a.status = :status')
             ->setParameter('time', strtotime((new \DateTime())->format('Y-m-d')))
-            ->setParameter('status', true)
             ->getQuery()
             ->getResult();
     }
