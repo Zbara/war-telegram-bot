@@ -8,6 +8,12 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 class ApiExceptionListener
 {
+    public function __construct(
+        private bool $isDebug
+    )
+    {
+    }
+
     public function __invoke(ExceptionEvent $event): void
     {
         $throwable = $event->getThrowable();
@@ -18,7 +24,7 @@ class ApiExceptionListener
                     'code' => $throwable->getCode(),
                     'messages' => $throwable->getMessage(),
                     'class' => get_class($throwable),
-                    'trace' => $throwable->getTrace()
+                    'trace' => $this->isDebug ? $throwable->getTrace() : null
                 ]
             )
         );
