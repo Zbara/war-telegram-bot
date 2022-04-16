@@ -55,6 +55,7 @@ class Alerts
             }
             $this->entityManager->flush();
         }
+        $this->items->clear();
     }
 
     /**
