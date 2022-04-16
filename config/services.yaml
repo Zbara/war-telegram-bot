@@ -34,7 +34,3 @@ services:
 
     Telegram\Bot\Api:
         factory: [ '@Borsaco\TelegramBotApiBundle\Service\Bot', 'getBot' ]
-
-    App\Listener\ApiExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception, priority: 10 }

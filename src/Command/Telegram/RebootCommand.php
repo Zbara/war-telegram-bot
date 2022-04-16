@@ -9,6 +9,7 @@ use Telegram\Bot\Keyboard\Keyboard;
 class RebootCommand extends MainCommand
 {
     protected $name = "reboot";
+    protected $aliases = ['restart', 'reload'];
     protected ?string $backAction = null;
     protected $description = "Перезапуск";
 

@@ -32,4 +32,14 @@ class AlertsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function active(){
+        $builder = $this->createQueryBuilder('a');
+
+        return $builder
+            ->andWhere('a.status = :status')
+            ->setParameter('status', false)
+            ->getQuery()
+            ->getResult();
+    }
 }

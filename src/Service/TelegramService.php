@@ -112,7 +112,7 @@ class TelegramService
             } catch (\Throwable $e) {
                 $this->bot->sendMessage([
                     'chat_id' => $this->bot->getWebhookUpdate()->getChat()->id,
-                    'text' => $e->getMessage()
+                    'text' => 'Команди не існує.'
                 ]);
             }
         }

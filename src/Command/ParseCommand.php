@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\ParserService;
+use App\Parser\Alerts;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -12,14 +12,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:parse',
-    description: 'Add a short description for your command',
+    name: 'zbara:parse',
+    description: 'Парсинг тревог',
 )]
 class ParseCommand extends Command
 {
 
     public function __construct(
-        private ParserService $parserService
+        private Alerts $alerts
     )
     {
         parent::__construct();
@@ -27,6 +27,10 @@ class ParseCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->parserService->run();
+        while (true) {
+            $this->alerts->handle();
+
+            sleep(40);
+        }
     }
 }

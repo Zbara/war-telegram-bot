@@ -6,6 +6,7 @@ namespace App\Command\Telegram;
 use App\Entity\Users;
 use App\Repository\AlertsRepository;
 use App\Repository\UsersRepository;
+use App\Service\GitService;
 use App\Service\ParserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Telegram\Bot\Commands\Command;
@@ -23,20 +24,22 @@ class MainCommand  extends Command
     protected Users $user;
     protected Api $api;
     protected Environment $environment;
-    protected ParserService $parse;
+    protected GitService $gitService;
+    protected AlertsRepository $alertsRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         Api $api,
         Environment  $environment,
-        ParserService $parserService,
-        AlertsRepository       $alertsRepository
+        AlertsRepository       $alertsRepository,
+        GitService $gitService
     )
     {
         $this->entityManager = $entityManager;
         $this->api = $api;
         $this->environment = $environment;
         $this->alertsRepository = $alertsRepository;
+        $this->gitService = $gitService;
     }
 
     public function handle()
