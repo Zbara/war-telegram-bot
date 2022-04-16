@@ -11,7 +11,9 @@ class GitService
         $branch = trim(exec('git symbolic-ref HEAD | sed -e "s/^refs\/heads\///"'));
         $rev = mb_str_split(exec('git rev-list HEAD --count'));
 
-        return sprintf('%s.%s.%s-%s', self::MAJOR, implode('.', $rev), $branch, $this->getHash());
+        // return sprintf('%s.%s.%s-%s', self::MAJOR, implode('.', $rev), $branch, $this->getHash());
+
+        return '1.1';
     }
 
     public function getDate(): string
