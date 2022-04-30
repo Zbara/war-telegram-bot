@@ -29,7 +29,7 @@ class Api
         try {
             $response = $this->httpClient->request('GET', 'https://api.alerts.in.ua/v1/alerts/active.json', [
                 'body' => [],
-                //'proxy' => 'http://:@127.0.0.1:8888'
+                'proxy' => 'http://:@127.0.0.1:8888'
             ]);
             if (Response::HTTP_OK === $response->getStatusCode()) {
                 return $response->toArray();

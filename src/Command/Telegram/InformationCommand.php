@@ -14,7 +14,7 @@ class InformationCommand extends MainCommand
         $this->replyWithChatAction(['action' => Actions::TYPING]);
 
         $this->replyWithMessage([
-            'text' => "Бот що показує активні повітряні тривоги. Інформація береться із сайту - alerts.in.ua. \n\n Версія " . $this->gitService->getBuild(),
+            'text' => "Бот що показує активні повітряні тривоги. Інформація береться із сайту - alerts.in.ua. \n\nПригласи друзів @ZbaraAirBot. \n\nZbara Dev © 2022 " . $this->gitService->getBuild(),
             'chat_id' => $this->getUpdate()->getChat()->id,
         ]);
     }

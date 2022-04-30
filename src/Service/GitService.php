@@ -8,28 +8,15 @@ class GitService
 
     public function getBuild(): string
     {
-        $branch = trim(exec('git symbolic-ref HEAD | sed -e "s/^refs\/heads\///"'));
-        $rev = mb_str_split(exec('git rev-list HEAD --count'));
+        $rev = mb_str_split(substr_count(shell_exec('cat ../.git/logs/HEAD'), "\n"));
 
-        // return sprintf('%s.%s.%s-%s', self::MAJOR, implode('.', $rev), $branch, $this->getHash());
-
-        return '1.1';
+        return sprintf('v%s.%s build %s', self::MAJOR, implode('.', $rev), date('Y/m/d/h-m-s', $this->gitDate()));
     }
 
-    public function getDate(): string
+    public function gitDate(): bool|int
     {
-        return trim(exec("git log -1 --pretty=format:'%ci'"));
-    }
+        $branch = trim(substr(shell_exec('cat ../.git/HEAD'), 4));
 
-    public function getHash(): string
-    {
-        $commitHash = trim(exec('git log --pretty="%h" -n1 HEAD'));
-
-        return sprintf('%s', $commitHash);
-    }
-
-    public function getCommand($exec): string
-    {
-        return trim(exec('git ' . $exec));
+        return filemtime(sprintf( '../.git/%s', $branch ));
     }
 }
