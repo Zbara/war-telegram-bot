@@ -10,7 +10,7 @@ class GitService
     {
         $rev = mb_str_split(substr_count(shell_exec('cat ../.git/logs/HEAD'), "\n"));
 
-        return sprintf('v%s.%s build %s', self::MAJOR, implode('.', $rev), date('Y/m/d/h-m-s', $this->gitDate()));
+        return sprintf('v%s.%s build %s', self::MAJOR, implode('.', $rev), date('Y/m/d-h:m', $this->gitDate()));
     }
 
     public function gitDate(): bool|int
