@@ -18,6 +18,12 @@ class ApiExceptionListener
     {
         $throwable = $event->getThrowable();
 
+        dump(explode(' ', exec('cat ../.git/logs/HEAD')));
+
+        die;
+
+
+
         $event->setResponse(
             new JsonResponse(
                 [

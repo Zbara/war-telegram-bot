@@ -13,10 +13,13 @@ class GitService
         return sprintf('v%s.%s build %s', self::MAJOR, implode('.', $rev), date('Y/m/d-h:m', $this->gitDate()));
     }
 
-    public function gitDate(): bool|int
+    public function gitDate(): string
     {
-        $branch = trim(substr(shell_exec('cat ../.git/HEAD'), 4));
+        $date = explode(' ', exec('cat ../.git/logs/HEAD'));
 
-        return filemtime(sprintf( '../.git/%s', $branch ));
+        if (isset($date[4])) {
+            return $date[4];
+        }
+        return time();
     }
 }
